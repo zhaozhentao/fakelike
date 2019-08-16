@@ -1,16 +1,78 @@
 <style lang="less">
+  page {
+    width: 100%;
+    height: 100%;
+  }
 
+  .container {
+    height: 100%;
+  }
+
+  image {
+    width: 100%;
+  }
+
+  .generate-btn {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+    color: black;
+    background: white;
+    font-size: 16px;
+    position: fixed;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .share-canvas {
+    width: 100%;
+    height: 100%;
+  }
 </style>
-<template>
-  <view class="container">
 
+<template>
+  <view style="width: 100%; height: 100%;">
+    <view class="container" id="wrapper">
+      <image mode="widthFix" class="draw" src="../assets/demo.jpg"/>
+
+      <view class="generate-btn" bindtap="drawCanvas">生成</view>
+    </view>
+
+    <canvas canvas-id="canvas-map" class="share-canvas"></canvas>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import wxml2canvas from '../util/wxml2canvas'
 
   export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'Fake',
+      navigationBarTextStyle: 'black'
+    }
 
+    methods = {
+      async drawCanvas() {
+        const wrapperId = '#wrapper'
+        const drawClassName = '.draw'
+        const canvasId = 'canvas-map'
+
+        await wxml2canvas(wrapperId, drawClassName, canvasId)
+
+        let res = await wepy.canvasToTempFilePath({canvasId: canvasId, quality: 1})
+        let settings = await wepy.getSetting()
+
+        if (!settings.authSetting['scope.writePhotosAlbum']) {
+          let authResult = await wepy.authorize({scope: 'scope.writePhotosAlbum'})
+
+          if (authResult.errMsg !== 'authorize:ok') {
+            return
+          }
+        }
+        wepy.saveImageToPhotosAlbum({filePath: res.tempFilePath})
+      }
+    }
   }
 </script>
