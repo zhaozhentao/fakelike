@@ -19,6 +19,7 @@
 
   .go {
     padding-top: 10px;
+    margin-top: 20px;
     padding-bottom: 10px;
     text-align: center;
     width: 180px;
@@ -64,10 +65,6 @@
 
         wepy.navigateTo({url: `./index?path=${this.path}`})
       }
-    }
-
-    onLoad() {
-
     }
   }
 </script>
