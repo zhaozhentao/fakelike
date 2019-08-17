@@ -1,2 +1,2 @@
 #!/bin/bash
-wget -c "https://tva1.sinaimg.cn/crop.0.0.708.708.50/82b94fb4jw8eyoso8bvv2j20jo0jodir.jpg?Expires=1566013635&ssig=CRfrVcsU0%2F&KID=imgbed,tva" -O avatar22.jpeg
+wget -c "http://img1.imgtn.bdimg.com/it/u=1864942380,1660582897&fm=26&gp=0.jpg" -O avatar24.jpeg
