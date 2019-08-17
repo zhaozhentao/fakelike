@@ -39,6 +39,7 @@
     }
 
     data = {
+      value: 0,
       path: null,
       position: 0,
       items: null
@@ -50,13 +51,14 @@
       },
 
       async drawCanvas() {
-        wepy.navigateTo({url: `./preview?position=${this.position}&path=${this.path}`})
+        wepy.navigateTo({url: `./preview?position=${this.position}&path=${this.path}&value=${this.value}`})
       }
     }
 
     onLoad(options) {
-      this.items = avatars
+      this.value = parseInt(options.value)
       this.path = options.path
+      this.items = avatars.slice(0, this.value)
     }
   }
 </script>

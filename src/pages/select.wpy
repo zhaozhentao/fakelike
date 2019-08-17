@@ -27,12 +27,22 @@
     border-radius: 4px;
     background: red;
   }
+
+  .side_container {
+    margin-top: 20px;
+    width: 80%;
+  }
 </style>
 
 <template>
   <view class="container">
-    <image @tap="select" class="add" src="../assets/add.png"></image>
+    <image @tap="select" class="add" src="{{path}}"></image>
     <view class="tips">选择需要点赞的朋友圈截图</view>
+
+    <view class="side_container">
+      <slider bindchange="sideChange" min="1" max="60" show-value/>
+    </view>
+    <view class="tips">点赞数:{{ value }}</view>
 
     <view @tap="go" class="go">go</view>
   </view>
@@ -48,22 +58,28 @@
     }
 
     data = {
-      path: null
+      value: 1,
+      path: '../assets/add.png'
     }
 
     methods = {
       async select() {
         let result = await wepy.chooseImage()
         this.path = result.tempFilePaths[0]
+        this.$apply()
+      },
+
+      sideChange(e) {
+        this.value = e.detail.value
       },
 
       go() {
-        if (this.path === null) {
+        if (this.path === '../assets/add.png') {
           wepy.showToast({title: '请先选择图片', icon: 'none', duration: 2000})
           return
         }
 
-        wepy.navigateTo({url: `./index?path=${this.path}`})
+        wepy.navigateTo({url: `./index?path=${this.path}&value=${this.value}`})
       }
     }
   }

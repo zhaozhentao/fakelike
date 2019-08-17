@@ -51,8 +51,6 @@
       style: ''
     }
 
-    methods = {}
-
     async create() {
       const canvasId = 'canvas-map'
 
@@ -74,16 +72,17 @@
         }
       }
       wepy.saveImageToPhotosAlbum({filePath: res.tempFilePath})
+
+      wepy.showToast({title: '到相册查看截图', icon: 'none', duration: 2000})
     }
 
     onLoad(options) {
       this.position = options.position
       this.path = options.path
-      this.items = avatars
+      this.items = avatars.slice(0, parseInt(options.value))
       this.style = `top: ${this.position}px;`
 
       let self = this
-
       setTimeout(function () {
         self.create()
       }, 2000)
