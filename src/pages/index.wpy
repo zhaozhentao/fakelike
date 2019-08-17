@@ -4,7 +4,6 @@
 
 <template>
   <view style="width: 100%; height: 100%;">
-    <canvas canvas-id="canvas-map" class="share-canvas"></canvas>
 
     <view class="container" id="wrapper">
       <image mode="widthFix" class="draw circle" src="../assets/demo.jpg"/>
@@ -16,7 +15,7 @@
           <image class="like_icon" src="../assets/like.png"></image>
 
           <view class="avatar_container">
-            <repeat for="{{ avatars }}" item="item">
+            <repeat for="{{ items }}" item="item">
               <image class="avatar" src="{{ item }}"></image>
             </repeat>
           </view>
@@ -31,6 +30,7 @@
 <script>
   import wepy from 'wepy'
   import wxml2canvas from '../util/wxml2canvas'
+  import {avatars} from '../util/avatars'
 
   export default class Index extends wepy.page {
     config = {
@@ -40,21 +40,7 @@
 
     data = {
       position: 0,
-      avatars: [
-        'https://tvax4.sinaimg.cn/crop.0.0.640.640.180/6e064726ly8fqeacewghbj20hs0hsdgq.jpg?Expires=1566005997&ssig=JOeB0inbbA&KID=imgbed,tva',
-        'https://tvax4.sinaimg.cn/crop.0.0.640.640.180/6e064726ly8fqeacewghbj20hs0hsdgq.jpg?Expires=1566005997&ssig=JOeB0inbbA&KID=imgbed,tva',
-        'https://tvax4.sinaimg.cn/crop.0.0.640.640.180/6e064726ly8fqeacewghbj20hs0hsdgq.jpg?Expires=1566005997&ssig=JOeB0inbbA&KID=imgbed,tva',
-        'https://tvax4.sinaimg.cn/crop.0.0.640.640.180/6e064726ly8fqeacewghbj20hs0hsdgq.jpg?Expires=1566005997&ssig=JOeB0inbbA&KID=imgbed,tva',
-        'https://tvax4.sinaimg.cn/crop.0.0.640.640.180/6e064726ly8fqeacewghbj20hs0hsdgq.jpg?Expires=1566005997&ssig=JOeB0inbbA&KID=imgbed,tva',
-        'https://tvax4.sinaimg.cn/crop.0.0.640.640.180/6e064726ly8fqeacewghbj20hs0hsdgq.jpg?Expires=1566005997&ssig=JOeB0inbbA&KID=imgbed,tva',
-        'https://tvax4.sinaimg.cn/crop.0.0.640.640.180/6e064726ly8fqeacewghbj20hs0hsdgq.jpg?Expires=1566005997&ssig=JOeB0inbbA&KID=imgbed,tva',
-        'https://tvax4.sinaimg.cn/crop.0.0.640.640.180/6e064726ly8fqeacewghbj20hs0hsdgq.jpg?Expires=1566005997&ssig=JOeB0inbbA&KID=imgbed,tva',
-        'https://tvax4.sinaimg.cn/crop.0.0.640.640.180/6e064726ly8fqeacewghbj20hs0hsdgq.jpg?Expires=1566005997&ssig=JOeB0inbbA&KID=imgbed,tva',
-        'https://tvax4.sinaimg.cn/crop.0.0.640.640.180/6e064726ly8fqeacewghbj20hs0hsdgq.jpg?Expires=1566005997&ssig=JOeB0inbbA&KID=imgbed,tva',
-        'https://tvax4.sinaimg.cn/crop.0.0.640.640.180/6e064726ly8fqeacewghbj20hs0hsdgq.jpg?Expires=1566005997&ssig=JOeB0inbbA&KID=imgbed,tva',
-        'https://tvax4.sinaimg.cn/crop.0.0.640.640.180/6e064726ly8fqeacewghbj20hs0hsdgq.jpg?Expires=1566005997&ssig=JOeB0inbbA&KID=imgbed,tva',
-        'https://tvax4.sinaimg.cn/crop.0.0.640.640.180/6e064726ly8fqeacewghbj20hs0hsdgq.jpg?Expires=1566005997&ssig=JOeB0inbbA&KID=imgbed,tva'
-      ]
+      items: null
     }
 
     methods = {
@@ -85,6 +71,10 @@
         }
         wepy.saveImageToPhotosAlbum({filePath: res.tempFilePath})
       }
+    }
+
+    onLoad() {
+      this.items = avatars
     }
   }
 </script>
