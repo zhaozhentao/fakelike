@@ -3,6 +3,7 @@
 
   .like_container {
     position: absolute;
+    left: 0;
     right: 0;
     padding: 8px;
     background: #f2f0f4;

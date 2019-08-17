@@ -33,7 +33,7 @@
     </view>
 
     <movable-area style="height: 100%; width: 100%; position: absolute;" scale-area>
-      <movable-view style="width: 100%;" direction="vertical" bindchange="onChange">
+      <movable-view style="width: 100%;" y="200" direction="vertical" bindchange="onChange">
         <view class="like_bg">
           <image class="like_icon" src="../assets/like.png"></image>
 
@@ -67,7 +67,7 @@
     data = {
       value: 0,
       path: null,
-      position: 0,
+      position: 100,
       items: null
     }
 
