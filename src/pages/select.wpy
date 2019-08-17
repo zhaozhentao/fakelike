@@ -1,0 +1,73 @@
+<style lang="less">
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .add {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+  }
+
+  .tips {
+    margin-top: 16px;
+    font-size: 12px;
+    color: #999999;
+  }
+
+  .go {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    width: 180px;
+    color: white;
+    border-radius: 4px;
+    background: red;
+  }
+</style>
+
+<template>
+  <view class="container">
+    <image @tap="select" class="add" src="../assets/add.png"></image>
+    <view class="tips">选择需要点赞的朋友圈截图</view>
+
+    <view @tap="go" class="go">go</view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'Fake',
+      navigationBarTextStyle: 'black'
+    }
+
+    data = {
+      path: null
+    }
+
+    methods = {
+      async select() {
+        let result = await wepy.chooseImage()
+        this.path = result.tempFilePaths[0]
+      },
+
+      go() {
+        if (this.path === null) {
+          wepy.showToast({title: '请先选择图片', icon: 'none', duration: 2000})
+          return
+        }
+
+        wepy.navigateTo({url: `./index?path=${this.path}`})
+      }
+    }
+
+    onLoad() {
+
+    }
+  }
+</script>

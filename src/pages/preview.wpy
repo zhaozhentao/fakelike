@@ -17,7 +17,7 @@
     <canvas canvas-id="canvas-map" class="share-canvas"></canvas>
 
     <view class="container" id="wrapper">
-      <image mode="widthFix" class="draw circle" src="../assets/demo.jpg"/>
+      <image mode="widthFix" class="draw circle" src="{{path}}"/>
 
       <view class="like_container draw" style="{{style}}">
         <image class="like_icon draw" src="../assets/like.png"></image>
@@ -45,6 +45,7 @@
     }
 
     data = {
+      path: null,
       position: 0,
       items: null,
       style: ''
@@ -77,6 +78,7 @@
 
     onLoad(options) {
       this.position = options.position
+      this.path = options.path
       this.items = avatars
       this.style = `top: ${this.position}px;`
 
