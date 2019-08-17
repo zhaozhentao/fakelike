@@ -40,7 +40,8 @@
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: 'Fake',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: 'black',
+      navigationStyle: 'custom'
     }
 
     data = {
@@ -56,7 +57,12 @@
 
       await wxml2canvas('#wrapper', '.draw', canvasId)
 
-      let res = await wepy.canvasToTempFilePath({canvasId, quality: 1})
+      let res = await wepy.canvasToTempFilePath({
+        fileType: 'jpg',
+        canvasId,
+        quality: 1.0
+      })
+
       let settings = await wepy.getSetting()
 
       if (!settings.authSetting['scope.writePhotosAlbum']) {

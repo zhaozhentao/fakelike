@@ -29,13 +29,13 @@
 
 <script>
   import wepy from 'wepy'
-  import wxml2canvas from '../util/wxml2canvas'
   import {avatars} from '../util/avatars'
 
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: 'Fake',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: 'black',
+      navigationStyle: 'custom'
     }
 
     data = {
@@ -49,27 +49,7 @@
       },
 
       async drawCanvas() {
-        let str = 'haha'
-        if (str === 'haha') {
-          wepy.navigateTo({url: `./preview?position=${this.position}`})
-          return
-        }
-
-        const canvasId = 'canvas-map'
-
-        await wxml2canvas('#wrapper', '.draw', canvasId)
-
-        let res = await wepy.canvasToTempFilePath({canvasId, quality: 1})
-        let settings = await wepy.getSetting()
-
-        if (!settings.authSetting['scope.writePhotosAlbum']) {
-          let authResult = await wepy.authorize({scope: 'scope.writePhotosAlbum'})
-
-          if (authResult.errMsg !== 'authorize:ok') {
-            return
-          }
-        }
-        wepy.saveImageToPhotosAlbum({filePath: res.tempFilePath})
+        wepy.navigateTo({url: `./preview?position=${this.position}`})
       }
     }
 
