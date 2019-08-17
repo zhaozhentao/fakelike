@@ -23,7 +23,7 @@
       </movable-view>
     </movable-area>
 
-    <view class="generate" bindtap="drawCanvas">生成</view>
+    <view class="generate" bindtap="drawCanvas">生成点赞图😁</view>
   </view>
 </template>
 
