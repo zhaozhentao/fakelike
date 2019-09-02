@@ -6,7 +6,7 @@
     left: 0;
     right: 0;
     padding: 8px;
-    background: #f2f0f4;
+    background-color: #f2f0f4;
     margin-left: 10px;
     margin-right: 10px;
     display: flex;
@@ -18,14 +18,14 @@
     <canvas canvas-id="canvas-map" class="share-canvas"></canvas>
 
     <view class="container" id="wrapper">
-      <image mode="widthFix" class="draw circle" src="{{path}}"/>
+      <image mode="widthFix" data-z-index="0" class="draw circle" src="{{path}}"/>
 
-      <view class="like_container draw" style="{{style}}">
-        <image class="like_icon draw" src="../assets/like.png"></image>
+      <view class="like_container draw" data-z-index="1" style="{{style}}">
+        <image class="like_icon draw" data-z-index="2" src="../assets/like.png"></image>
 
-        <view class="avatar_container draw">
+        <view class="avatar_container draw" data-z-index="2">
           <repeat for="{{ items }}" item="item">
-            <image class="avatar draw" src="{{ item }}"></image>
+            <image class="avatar draw" data-z-index="2" src="{{ item }}"></image>
           </repeat>
         </view>
       </view>

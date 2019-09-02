@@ -415,13 +415,13 @@ const formatElementData = elements =>
   elements.map(element => {
     if (isTextElement(element)) {
       element.type = 'text'
-      element.rank = DEFAULT_RANK.text
+      element.rank = element.dataset.zIndex
     } else if (isImageElement(element)) {
       element.type = 'image'
-      element.rank = DEFAULT_RANK.image
+      element.rank = element.dataset.zIndex
     } else {
       element.type = 'view'
-      element.rank = DEFAULT_RANK.view
+      element.rank = element.dataset.zIndex
     }
     return element
   })
